@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><لا فتح إلا باسم من يستحق🤎</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#f3dede,#e4c7b8);
+overflow:hidden;
+color:#6d4c41;
+text-align:center;
+}
+
+.section{
+position:absolute;
+width:100%;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+transition:opacity 0.8s ease;
+}
+
+.hidden{
+opacity:0;
+pointer-events:none;
+}
+
+h1,h2,p{
+margin:8px;
+}
+
+input{
+padding:12px;
+border-radius:25px;
+border:2px solid #c8a58c;
+outline:none;
+font-size:16px;
+text-align:center;
+}
+
+button{
+margin-top:15px;
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#c8a58c;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#b08972;
+transform:scale(1.05);
+}
+
+.heart{
+position:absolute;
+bottom:-20px;
+animation:float 10s linear infinite;
+font-size:20px;
+opacity:0.6;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);}
+}
+
+.overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+top:0;
+left:0;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+}
+
+.big{
+font-size:28px;
+}
+
+.circle{
+width:150px;
+height:150px;
+border-radius:50%;
+background:#c8a58c;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.circle:hover{
+transform:scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<!-- المرحلة 1 -->
+<div id="stage1" class="section">
+<h1>لا يُفتح إلا باسم من يستحق 🤎</h1>
+<input type="text" id="nameInput" placeholder="اكتب الاسم هنا">
+<button onclick="checkName()">افتح</button>
+<p id="error"></p>
+</div>
+
+<!-- المرحلة 2 -->
+<div id="stage2" class="section hidden">
+<h1>كانت صدفة جميلة 🤎</h1>
+<p>عرفتك بالصدفة…</p>
+<p>لكنها كانت صدفة جميلة</p>
+<p>ووجودك صار يعني لي الكثير</p>
+<button onclick="nextStage(3)">تابع 🤍</button>
+</div>
+
+<!-- المرحلة 3 -->
+<div id="stage3" class="section hidden">
+<h1>23 / 02 / 2026 🤎</h1>
+<h2 id="timer"></h2>
+<p>الوقت جميل بوجودك 🤎</p>
+<button onclick="nextStage(4)">أكمل 🤍</button>
+</div>
+
+<!-- المرحلة 4 -->
+<div id="stage4" class="section hidden">
+<button onclick="secretMessage()">رسالة سرية 🤎</button>
+</div>
+
+<div id="overlay" class="overlay">
+<h1 id="countdown"></h1>
+<div id="finalMessage" style="display:none;">
+<p class="big">ولو عاد بي الزمن…<br>لاخترتك أنت مرة أخرى 🤎</p>
+<h2>هل تقبل تبقى معي دائماً؟ 🤎</h2>
+<button onclick="forever()">نعم 🤎</button>
+<p style="font-size:14px;">لا خيار لك إلا نعم… وابتسم 🤍</p>
+</div>
+</div>
+
+<!-- المرحلة 6 -->
+<div id="stage6" class="section hidden">
+<h1>قبل ما نكمل… 🤎</h1>
+<p>شكراً لأنك دخلت حياتي</p>
+<p>شكراً لأنك بقيت</p>
+<p>شكراً لأن صدفتنا استمرت</p>
+<button onclick="nextStage(7)">واصل 🤍</button>
+</div>
+
+<!-- المرحلة 7 -->
+<div id="stage7" class="section hidden">
+<h1>وعد بسيط 🤎</h1>
+<p>مهما صار… سأحافظ على هذه الصداقة الجميلة 🤍</p>
+<button onclick="nextStage(8)">وأنت؟ 🤎</button>
+</div>
+
+<!-- المرحلة 8 -->
+<div id="stage8" class="section hidden">
+<div class="circle" onclick="showFinal()">اضغط هنا 🤎</div>
+</div>
+
+<script>
+function checkName(){
+let name=document.getElementById("nameInput").value.trim();
+if(name==="نادر"){
+nextStage(2);
+}else{
+document.getElementById("error").innerText="ليس الاسم الصحيح 🤍";
+}
+}
+
+function nextStage(num){
+document.querySelectorAll(".section").forEach(s=>s.classList.add("hidden"));
+document.getElementById("stage"+num).classList.remove("hidden");
+}
+
+let startDate=new Date("2026-02-23T00:00:00");
+setInterval(()=>{
+let now=new Date();
+let diff=now-startDate;
+let days=Math.floor(diff/(1000*60*60*24));
+let hours=Math.floor((diff/(1000*60*60))%24);
+let minutes=Math.floor((diff/(1000*60))%60);
+let seconds=Math.floor((diff/1000)%60);
+document.getElementById("timer").innerText=
+days+" يوم "+hours+" ساعة "+minutes+" دقيقة "+seconds+" ثانية";
+},1000);
+
+function secretMessage(){
+let overlay=document.getElementById("overlay");
+overlay.style.display="flex";
+let count=5;
+let countdown=document.getElementById("countdown");
+countdown.innerText=count;
+let interval=setInterval(()=>{
+count--;
+countdown.innerText=count;
+if(count==0){
+clearInterval(interval);
+countdown.style.display="none";
+document.getElementById("finalMessage").style.display="block";
+}
+},1000);
+}
+
+function forever(){
+document.getElementById("overlay").style.display="none";
+nextStage(6);
+}
+
+function showFinal(){
+document.getElementById("stage8").innerHTML=
+"<h1 style='font-size:40px;'>نــــادر 🤎</h1>\
+<p>تركت أثراً لا يُمحى 🤎</p>\
+<p>البداية كانت صدفة…<br>وأصبحت صداقة جميلة 🤍</p>\
+<button onclick='location.reload()'>إعادة القصة 🤎</button>";
+}
+
+for(let i=0;i<25;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.style.left=Math.random()*100+"%";
+heart.style.animationDuration=(6+Math.random()*6)+"s";
+heart.innerText="🤎";
+document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
